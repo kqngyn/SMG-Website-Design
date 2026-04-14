@@ -4,7 +4,7 @@ A modern, high-performance website built for SMG Werks — a brand dedicated to 
 
 ---
 
-## ✦ Overview
+## Overview
 
 SMG Werks approaches automotive design with intention and restraint. Rather than altering a vehicle’s identity through backdating or forward-dating, the focus is on maintaining its original design and structure while refining performance, usability, and driving experience.
 
@@ -12,7 +12,7 @@ This website translates that philosophy into a digital experience — balancing 
 
 ---
 
-## ✦ Project Goals
+## Project Goals
 
 - Communicate SMG Werks’ core philosophy: preservation over modification  
 - Showcase craftsmanship, engineering, and attention to detail  
@@ -21,7 +21,7 @@ This website translates that philosophy into a digital experience — balancing 
 
 ---
 
-## ✦ Design Principles
+## Design Principles
 
 - **Authenticity First** — Honor original form and intent  
 - **Modern Performance** — Subtle integration of contemporary technology  
@@ -30,7 +30,7 @@ This website translates that philosophy into a digital experience — balancing 
 
 ---
 
-## ✦ Features (Planned / In Progress)
+## Features (Planned / In Progress)
 
 - Homepage with immersive hero + brand storytelling  
 - Vehicle showcase / project gallery  
@@ -40,7 +40,7 @@ This website translates that philosophy into a digital experience — balancing 
 
 ---
 
-## ✦ Tech Stack
+## Tech Stack
 
 - HTML, CSS, JavaScript  
 - (Optional: React / Next.js if applicable)  
@@ -48,14 +48,14 @@ This website translates that philosophy into a digital experience — balancing 
 
 ---
 
-## ✦ Status
+## Status
 
 In active development  
 Initial structure, branding, and homepage design in progress.
 
 ---
 
-## ✦ Future Improvements
+## Future Improvements
 
 - CMS integration for easy content updates  
 - Performance optimization (lazy loading, image compression)  
@@ -64,13 +64,13 @@ Initial structure, branding, and homepage design in progress.
 
 ---
 
-## ✦ Author
+## Author
 
 Designed & developed by Khoi Nguyen
 
 ---
 
-## ✦ Notes
+## Notes
 
 This project is part of a client engagement with SMG Werks.  
 All branding and content are used with permission.
