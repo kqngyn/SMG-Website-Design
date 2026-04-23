@@ -1,0 +1,974 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>P001 — 993 RS Black Widow | SMG Werks</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --color-cotton: #f5f0eb;
+        --color-red: #e30613;
+        --color-maroon: #5c1a1b;
+        --color-black: #0a0a0a;
+        --color-white: #ffffff;
+        --font-heading: "Space Grotesk", sans-serif;
+        --font-body: "Inter", sans-serif;
+        --nav-height: 72px;
+        --border-radius: 12px;
+      }
+
+      *, *::before, *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        font-family: var(--font-body);
+        background-color: var(--color-cotton);
+        color: var(--color-black);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      img { max-width: 100%; display: block; }
+      a { text-decoration: none; color: inherit; }
+
+      h1, h2, h3, h4 {
+        font-family: var(--font-heading);
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        line-height: 1.1;
+      }
+
+      /* ========== NAVBAR ========== */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: calc(var(--nav-height) + 40px);
+        z-index: 1100;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: 20px 40px 0;
+        pointer-events: none;
+      }
+
+      .navbar.menu-open::before { opacity: 0; }
+
+      .navbar::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        background: linear-gradient(to bottom, rgba(10,10,10,0.6) 0%, rgba(10,10,10,0.3) 40%, transparent 100%);
+        mask-image: linear-gradient(to bottom, black 0%, black 30%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to bottom, black 0%, black 30%, transparent 100%);
+        z-index: -1;
+      }
+
+      .navbar__logo, .navbar__hamburger { pointer-events: auto; }
+
+      .navbar__logo img { height: 32px; width: auto; }
+
+      .navbar__hamburger {
+        width: 32px; height: 20px;
+        cursor: pointer;
+        display: flex; flex-direction: column; justify-content: space-between;
+        z-index: 1100;
+        position: relative;
+      }
+
+      .navbar__hamburger.active {
+        position: fixed;
+        top: 24px; right: 40px;
+      }
+
+      .navbar__hamburger span {
+        display: block; width: 100%; height: 2px;
+        background: var(--color-white);
+        transition: transform 0.4s ease, opacity 0.3s ease;
+      }
+
+      .navbar__hamburger.active span { background: var(--color-red); }
+      .navbar__hamburger.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+      .navbar__hamburger.active span:nth-child(2) { opacity: 0; }
+      .navbar__hamburger.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+      /* ========== MENU OVERLAY ========== */
+      .menu-overlay {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        z-index: 1050;
+        display: flex;
+        opacity: 0; visibility: hidden;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+      }
+
+      .menu-overlay.active { opacity: 1; visibility: visible; }
+
+      .menu-overlay__bg {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background-size: cover; background-position: center;
+        background-color: var(--color-black);
+        z-index: 0;
+      }
+
+      .menu-overlay__bg::after {
+        content: "";
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(10,10,10,0.85);
+      }
+
+      .menu-overlay__content {
+        position: relative; z-index: 1;
+        display: flex; flex-direction: column; justify-content: center;
+        padding: 120px 60px; width: 100%;
+      }
+
+      .menu-overlay__nav {
+        list-style: none;
+        display: flex; flex-direction: column; gap: 8px;
+      }
+
+      .menu-overlay__link {
+        font-family: var(--font-heading);
+        font-size: clamp(2rem, 5vw, 4rem);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: rgba(255,255,255,0.3);
+        transition: color 0.3s ease, transform 0.3s ease;
+        display: inline-block; cursor: pointer;
+      }
+
+      .menu-overlay__link:hover {
+        color: var(--color-white);
+        transform: translateX(20px);
+      }
+
+      /* ========== HERO ========== */
+      .hero {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-start;
+        overflow: hidden;
+        background: var(--color-black);
+      }
+
+      .hero__image-placeholder {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: var(--color-black);
+        display: flex; align-items: center; justify-content: center;
+      }
+
+      .hero__image-placeholder span {
+        font-family: var(--font-heading);
+        font-size: 1rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.2);
+      }
+
+      .hero__overlay {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: linear-gradient(to top, rgba(10,10,10,0.8) 0%, transparent 50%);
+        z-index: 1;
+      }
+
+      .hero__content {
+        position: relative; z-index: 2;
+        padding: 60px 40px;
+        width: 100%;
+      }
+
+      .hero__breadcrumb {
+        font-family: var(--font-body);
+        font-size: 0.75rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.4);
+        margin-bottom: 24px;
+      }
+
+      .hero__breadcrumb a { transition: color 0.3s ease; }
+      .hero__breadcrumb a:hover { color: var(--color-red); }
+      .hero__breadcrumb span { color: rgba(255,255,255,0.2); margin: 0 8px; }
+
+      .hero__model {
+        font-family: var(--font-heading);
+        font-size: clamp(4rem, 10vw, 9rem);
+        font-weight: 700;
+        color: var(--color-white);
+        letter-spacing: 0.04em;
+        line-height: 0.9;
+      }
+
+      .hero__name {
+        font-family: var(--font-heading);
+        font-size: clamp(1.5rem, 3vw, 2.5rem);
+        font-weight: 300;
+        color: var(--color-red);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-top: 8px;
+      }
+
+      .hero__specs-row {
+        display: flex;
+        gap: 40px;
+        margin-top: 32px;
+      }
+
+      .hero__spec {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .hero__spec-label {
+        font-family: var(--font-heading);
+        font-size: 0.6rem;
+        font-weight: 500;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.35);
+      }
+
+      .hero__spec-value {
+        font-family: var(--font-heading);
+        font-size: 0.9rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--color-white);
+      }
+
+      /* ========== GALLERY STRIP ========== */
+      .gallery-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4px;
+        background: var(--color-black);
+        padding: 4px 0;
+      }
+
+      .gallery-strip__item {
+        aspect-ratio: 16 / 10;
+        background: #1a1a1a;
+        display: flex; align-items: center; justify-content: center;
+        overflow: hidden;
+      }
+
+      .gallery-strip__item span {
+        font-family: var(--font-heading);
+        font-size: 0.7rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.15);
+      }
+
+      /* ========== DETAIL SECTIONS ========== */
+      .detail {
+        display: flex;
+        align-items: center;
+        padding: 80px 40px;
+        background: var(--color-white);
+        gap: 40px;
+        max-width: 100%;
+      }
+
+      .detail--reverse { flex-direction: row-reverse; }
+
+      .detail + .detail {
+        border-top: 1px solid rgba(10,10,10,0.06);
+      }
+
+      .detail__image {
+        flex: 1;
+        min-height: 400px;
+        background: #eae6e1;
+        display: flex; align-items: center; justify-content: center;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+      }
+
+      .detail__image span {
+        font-family: var(--font-heading);
+        font-size: 0.75rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: rgba(10,10,10,0.2);
+      }
+
+      .detail__content {
+        flex: 1;
+        padding: 40px 20px;
+      }
+
+      .detail__label {
+        font-family: var(--font-heading);
+        font-size: 0.7rem;
+        font-weight: 500;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--color-red);
+        margin-bottom: 16px;
+      }
+
+      .detail__title {
+        font-size: clamp(1.8rem, 3vw, 2.8rem);
+        color: var(--color-black);
+        margin-bottom: 24px;
+      }
+
+      .detail__text {
+        font-size: 1rem;
+        line-height: 1.85;
+        color: rgba(10,10,10,0.6);
+        max-width: 500px;
+      }
+
+      /* ========== INTERIOR GALLERY ========== */
+      .interior-gallery {
+        padding: 40px;
+        background: var(--color-white);
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+      }
+
+      .interior-gallery__item {
+        aspect-ratio: 1;
+        background: #eae6e1;
+        display: flex; align-items: center; justify-content: center;
+        overflow: hidden;
+        border-radius: 8px;
+      }
+
+      .interior-gallery__item--wide {
+        grid-column: span 2;
+        aspect-ratio: 2 / 1;
+      }
+
+      .interior-gallery__item span {
+        font-family: var(--font-heading);
+        font-size: 0.65rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: rgba(10,10,10,0.2);
+      }
+
+      /* ========== SPEC SHEET ========== */
+      .spec-sheet {
+        padding: 100px 40px;
+        background: var(--color-white);
+        border-top: 1px solid rgba(10,10,10,0.06);
+      }
+
+      .spec-sheet__inner {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .spec-sheet__header {
+        margin-bottom: 60px;
+      }
+
+      .spec-sheet__label {
+        font-family: var(--font-heading);
+        font-size: 0.7rem;
+        font-weight: 500;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--color-red);
+        margin-bottom: 16px;
+      }
+
+      .spec-sheet__title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        color: var(--color-black);
+      }
+
+      .spec-sheet__grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0 60px;
+      }
+
+      .spec-sheet__row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 16px 0;
+        border-bottom: 1px solid rgba(10,10,10,0.08);
+        gap: 24px;
+      }
+
+      .spec-sheet__row-label {
+        font-family: var(--font-heading);
+        font-size: 0.7rem;
+        font-weight: 500;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: rgba(10,10,10,0.4);
+      }
+
+      .spec-sheet__row-value {
+        font-family: var(--font-body);
+        font-size: 0.9rem;
+        color: var(--color-black);
+        text-align: right;
+      }
+
+      /* ========== BACK LINK ========== */
+      .back-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 40px;
+        background: var(--color-white);
+      }
+
+      .back-link__btn {
+        font-family: var(--font-heading);
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--color-black);
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: color 0.3s ease, gap 0.3s ease;
+      }
+
+      .back-link__btn:hover {
+        color: var(--color-red);
+        gap: 16px;
+      }
+
+      .back-link__btn svg {
+        width: 18px; height: 18px;
+      }
+
+      /* ========== FOOTER ========== */
+      .footer {
+        min-height: 100vh;
+        background: var(--color-cotton);
+        color: var(--color-black);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 60px 60px 40px;
+      }
+
+      .footer__top { display: flex; gap: 60px; padding-bottom: 60px; }
+      .footer__top-left { flex: 1; }
+      .footer__logo-large { margin-bottom: 32px; }
+      .footer__logo-large img { height: clamp(40px, 6vw, 60px); width: auto; }
+
+      .footer__headline {
+        font-family: var(--font-heading);
+        font-size: clamp(2.2rem, 4.5vw, 4rem);
+        font-weight: 700; text-transform: uppercase;
+        letter-spacing: 0.02em; line-height: 1.05;
+        color: var(--color-black); margin-bottom: 24px;
+      }
+
+      .footer__tagline {
+        font-family: var(--font-body); font-size: 0.8rem;
+        font-style: italic; color: rgba(10,10,10,0.35); margin-bottom: 16px;
+      }
+
+      .footer__desc {
+        font-size: 0.95rem; line-height: 1.7;
+        color: rgba(10,10,10,0.45); max-width: 420px;
+      }
+
+      .footer__top-right { flex: 1; display: flex; align-items: center; max-width: 480px; }
+
+      .footer__form { width: 100%; display: flex; flex-direction: column; gap: 16px; }
+      .footer__form-row { display: flex; gap: 12px; }
+      .footer__form-row > * { flex: 1; }
+      .footer__form-group { display: flex; flex-direction: column; gap: 6px; }
+
+      .footer__form-label {
+        font-family: var(--font-heading); font-size: 0.6rem; font-weight: 500;
+        letter-spacing: 0.2em; text-transform: uppercase; color: rgba(10,10,10,0.35);
+      }
+
+      .footer__form-input, .footer__form-textarea {
+        font-family: var(--font-body); font-size: 0.9rem; color: var(--color-black);
+        background: transparent; border: 1px solid rgba(10,10,10,0.15);
+        border-radius: 8px; padding: 12px 14px; outline: none;
+        transition: border-color 0.3s ease, background 0.3s ease;
+      }
+
+      .footer__form-input::placeholder, .footer__form-textarea::placeholder { color: rgba(10,10,10,0.25); }
+      .footer__form-input:focus, .footer__form-textarea:focus { border-color: var(--color-red); background: rgba(255,255,255,0.5); }
+      .footer__form-textarea { resize: vertical; min-height: 100px; }
+
+      .footer__form-submit {
+        font-family: var(--font-heading); font-size: 0.8rem; font-weight: 500;
+        letter-spacing: 0.15em; text-transform: uppercase;
+        color: var(--color-white); background: var(--color-black);
+        border: none; border-radius: 8px; padding: 14px 32px;
+        cursor: pointer; transition: background 0.3s ease, transform 0.3s ease;
+        align-self: flex-start; margin-top: 4px;
+      }
+
+      .footer__form-submit:hover { background: var(--color-red); transform: translateY(-2px); }
+
+      .footer__nav {
+        display: flex; justify-content: space-between; align-items: flex-start;
+        padding-top: 24px; border-top: 1px solid rgba(10,10,10,0.12);
+        flex-wrap: wrap; gap: 32px;
+      }
+
+      .footer__nav-col { display: flex; flex-direction: column; gap: 8px; }
+      .footer__nav-col--meta { font-family: var(--font-body); font-size: 0.8rem; color: rgba(10,10,10,0.35); line-height: 1.6; }
+
+      .footer__nav-title {
+        font-family: var(--font-heading); font-size: 0.65rem; font-weight: 600;
+        letter-spacing: 0.2em; text-transform: uppercase; color: rgba(10,10,10,0.35); margin-bottom: 4px;
+      }
+
+      .footer__nav-col a { font-size: 0.85rem; color: rgba(10,10,10,0.6); transition: color 0.3s ease; line-height: 1.8; }
+      .footer__nav-col a:hover { color: var(--color-red); }
+
+      .footer__disclaimer-row { display: flex; justify-content: space-between; align-items: baseline; padding-top: 32px; gap: 24px; }
+      .footer__disclaimer { font-size: 0.7rem; color: rgba(10,10,10,0.2); max-width: 600px; line-height: 1.6; }
+      .footer__credit { font-size: 0.7rem; color: rgba(10,10,10,0.3); white-space: nowrap; }
+      .footer__credit a { color: rgba(10,10,10,0.45); transition: color 0.3s ease; }
+      .footer__credit a:hover { color: var(--color-red); }
+
+      /* ========== SCROLL ANIMATIONS ========== */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .reveal-delay-1 { transition-delay: 0.1s; }
+      .reveal-delay-2 { transition-delay: 0.2s; }
+      .reveal-delay-3 { transition-delay: 0.3s; }
+
+      /* ========== RESPONSIVE ========== */
+      @media (max-width: 1024px) {
+        .detail {
+          flex-direction: column;
+          min-height: auto;
+        }
+
+        .detail--reverse { flex-direction: column; }
+
+        .detail__image {
+          min-height: 300px;
+          width: 100%;
+        }
+
+        .detail__content {
+          padding: 60px 40px;
+        }
+
+        .gallery-strip {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .interior-gallery {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .interior-gallery__item--wide {
+          grid-column: span 2;
+        }
+
+        .spec-sheet__grid {
+          grid-template-columns: 1fr;
+        }
+
+        .footer__top { flex-direction: column; }
+        .footer__top-right { max-width: 100%; }
+        .footer__nav { gap: 28px; }
+      }
+
+      @media (max-width: 768px) {
+        .navbar { padding: 0 24px; }
+
+        .navbar__hamburger.active { right: 24px; }
+
+        .hero__content { padding: 40px 24px; }
+
+        .hero__specs-row {
+          flex-wrap: wrap;
+          gap: 20px;
+        }
+
+        .gallery-strip {
+          grid-template-columns: 1fr;
+        }
+
+        .detail__content {
+          padding: 48px 24px;
+        }
+
+        .interior-gallery {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .interior-gallery__item--wide {
+          grid-column: span 1;
+          aspect-ratio: 1;
+        }
+
+        .spec-sheet {
+          padding: 60px 24px;
+        }
+
+        .menu-overlay__content {
+          padding: 120px 24px;
+        }
+
+        .footer { padding: 40px 24px 24px; min-height: auto; }
+        .footer__headline { font-size: clamp(2rem, 8vw, 3rem); }
+        .footer__form-row { flex-direction: column; gap: 16px; }
+        .footer__nav { flex-direction: column; gap: 24px; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- ========== NAVBAR ========== -->
+    <nav class="navbar">
+      <a href="index.html" class="navbar__logo">
+        <img src="assets/SMG-Logo.png" alt="SMG Werks">
+      </a>
+      <div class="navbar__hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </nav>
+
+    <!-- ========== MENU OVERLAY ========== -->
+    <div class="menu-overlay" id="menuOverlay">
+      <div class="menu-overlay__bg"></div>
+      <div class="menu-overlay__content">
+        <ul class="menu-overlay__nav">
+          <li><a href="index.html" class="menu-overlay__link">Home</a></li>
+          <li><a href="index.html#builds" class="menu-overlay__link">Builds</a></li>
+          <li><a href="store.html" class="menu-overlay__link">Store</a></li>
+          <li><a href="#" class="menu-overlay__link">Contact Us</a></li>
+          <li><a href="#" class="menu-overlay__link">Cart</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ========== HERO ========== -->
+    <section class="hero">
+      <div class="hero__image-placeholder">
+        <span>993 RS Hero Photo</span>
+      </div>
+      <div class="hero__overlay"></div>
+      <div class="hero__content">
+        <p class="hero__breadcrumb">
+          <a href="index.html">Home</a>
+          <span>/</span>
+          <a href="index.html#builds">Builds</a>
+          <span>/</span>
+          993 RS
+        </p>
+        <h1 class="hero__model">993</h1>
+        <p class="hero__name">Black Widow</p>
+        <div class="hero__specs-row">
+          <div class="hero__spec">
+            <span class="hero__spec-label">Type</span>
+            <span class="hero__spec-value">Carrera RS Tribute</span>
+          </div>
+          <div class="hero__spec">
+            <span class="hero__spec-label">Engine</span>
+            <span class="hero__spec-value">3.6L Flat-Six</span>
+          </div>
+          <div class="hero__spec">
+            <span class="hero__spec-label">Spec</span>
+            <span class="hero__spec-value">RS-Spec</span>
+          </div>
+          <div class="hero__spec">
+            <span class="hero__spec-label">Power</span>
+            <span class="hero__spec-value">350hp @ 7,000 rpm</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== ENGINE & POWERTRAIN ========== -->
+    <section class="detail">
+      <div class="detail__image">
+        <span>Engine Photo</span>
+      </div>
+      <div class="detail__content reveal">
+        <p class="detail__label">Engine &amp; Powertrain</p>
+        <h2 class="detail__title">Built to<br>Perform</h2>
+        <p class="detail__text">The SMG Werks 993 Carrera RS Tribute Build is powered by a custom-built 3.6L engine equipped with RS camshafts, delivering performance characteristic of RS-spec engineering. Enhancing the auditory experience and maximizing exhaust flow is a performance X-pipe paired with tuned mufflers. The custom-built G50 close-ratio gearbox gives you sensational 2 to 3 shifts, while the RS lightweight flywheel and clutch kit compliments the rev-happy engine. To finish it off, the ECU has been custom-tuned, calibrated to RS specifications.</p>
+      </div>
+    </section>
+
+    <!-- ========== SUSPENSION ========== -->
+    <section class="detail detail--reverse">
+      <div class="detail__image">
+        <span>Suspension Photo</span>
+      </div>
+      <div class="detail__content reveal">
+        <p class="detail__label">Suspension</p>
+        <h2 class="detail__title">Precision<br>Handling</h2>
+        <p class="detail__text">Under the vehicle, it features a custom H&R coil-over suspension with adjustable camber plates, providing precise handling and ride-height flexibility. Upgraded front and rear adjustable sway bars, paired with RS tie-rods, ensure improved stability and cornering performance. Additionally, there is the 935 "X" strut brace enhancing overall structural integrity.</p>
+      </div>
+    </section>
+
+    <!-- ========== BRAKING & WHEELS ========== -->
+    <section class="detail">
+      <div class="detail__image">
+        <span>Wheels &amp; Brakes Photo</span>
+      </div>
+      <div class="detail__content reveal">
+        <p class="detail__label">Braking &amp; Wheels</p>
+        <h2 class="detail__title">Stopping<br>Power</h2>
+        <p class="detail__text">This build is equipped with Porsche Factory Big Red calipers for exceptional stopping power, complemented by stainless-steel brake lines that enhance durability and braking precision. SMG-fitment Cup 2 wheels provide a perfect blend of lightweight performance and track-ready styling, secured with custom titanium lug nuts for strength and a sleek finishing touch.</p>
+      </div>
+    </section>
+
+    <!-- ========== INTERIOR ========== -->
+    <section class="detail detail--reverse">
+      <div class="detail__image">
+        <span>Interior Photo</span>
+      </div>
+      <div class="detail__content reveal">
+        <p class="detail__label">Interior</p>
+        <h2 class="detail__title">Driver<br>Focused</h2>
+        <p class="detail__text">The interior of this build showcases bespoke double-stitched red and black leather, beautifully accented with classic Pepita seat inserts for a timeless yet sporty look. Bespoke billet aluminum door handles and a billet sport short shifter lever add precision-crafted details, while a custom sport roll bar enhances safety and rigidity. Finishing touches include custom aluminum pedal boards, blending function with refined aesthetics to create a driver-focused cabin.</p>
+      </div>
+    </section>
+
+    <!-- ========== INTERIOR GALLERY ========== -->
+    <div class="interior-gallery">
+      <div class="interior-gallery__item"><span>Seats</span></div>
+      <div class="interior-gallery__item"><span>Leather Detail</span></div>
+      <div class="interior-gallery__item"><span>Shifter</span></div>
+      <div class="interior-gallery__item"><span>Pedals</span></div>
+      <div class="interior-gallery__item interior-gallery__item--wide"><span>Dashboard</span></div>
+      <div class="interior-gallery__item"><span>Door Handle</span></div>
+      <div class="interior-gallery__item"><span>Gauges</span></div>
+      <div class="interior-gallery__item interior-gallery__item--wide"><span>Exterior Angle</span></div>
+      <div class="interior-gallery__item"><span>Roll Bar</span></div>
+      <div class="interior-gallery__item"><span>Badge</span></div>
+    </div>
+
+    <!-- ========== SPEC SHEET ========== -->
+    <section class="spec-sheet">
+      <div class="spec-sheet__inner">
+        <div class="spec-sheet__header reveal">
+          <p class="spec-sheet__label">Specifications</p>
+          <h2 class="spec-sheet__title">993 Carrera RS<br>Tribute Spec</h2>
+        </div>
+        <div class="spec-sheet__grid reveal">
+          <div>
+            <div class="spec-sheet__row">
+              <span class="spec-sheet__row-label">Year</span>
+              <span class="spec-sheet__row-value">1997</span>
+            </div>
+            <div class="spec-sheet__row">
+              <span class="spec-sheet__row-label">Model</span>
+              <span class="spec-sheet__row-value">Porsche 911 (993)</span>
+            </div>
+            <div class="spec-sheet__row">
+              <span class="spec-sheet__row-label">Engine</span>
+              <span class="spec-sheet__row-value">3.6L Flat-Six</span>
+            </div>
+            <div class="spec-sheet__row">
+              <span class="spec-sheet__row-label">Power</span>
+              <span class="spec-sheet__row-value">350hp @ 7,000 rpm</span>
+            </div>
+            <div class="spec-sheet__row">
+              <span class="spec-sheet__row-label">Camshafts</span>
+              <span class="spec-sheet__row-value">RS Camshafts</span>
+            </div>
+            <div class="spec-sheet__row">
+              <span class="spec-sheet__row-label">Exhaust</span>
+              <span class="spec-sheet__row-value">Performance X-pipe / Tuned Mufflers</span>
+            </div>
+            <div class="spec-sheet__row">
+              <span class="spec-sheet__row-label">ECU</span>
+              <span class="spec-sheet__row-value">Custom RS-spec Tune</span>
+            </div>
+          </div>
+          <div>
+            <div class="spec-sheet__row">
+              <span class="spec-sheet__row-label">Gearbox</span>
+              <span class="spec-sheet__row-value">G50 Close-Ratio</span>
+            </div>
+            <div class="spec-sheet__row">
+              <span class="spec-sheet__row-label">Flywheel</span>
+              <span class="spec-sheet__row-value">RS Lightweight</span>
+            </div>
+            <div class="spec-sheet__row">
+              <span class="spec-sheet__row-label">Suspension</span>
+              <span class="spec-sheet__row-value">H&R Coilover / Adj. Camber</span>
+            </div>
+            <div class="spec-sheet__row">
+              <span class="spec-sheet__row-label">Brakes</span>
+              <span class="spec-sheet__row-value">Big Red Calipers / SS Lines</span>
+            </div>
+            <div class="spec-sheet__row">
+              <span class="spec-sheet__row-label">Wheels</span>
+              <span class="spec-sheet__row-value">SMG-fitment Cup 2</span>
+            </div>
+            <div class="spec-sheet__row">
+              <span class="spec-sheet__row-label">Lug Nuts</span>
+              <span class="spec-sheet__row-value">Custom Titanium</span>
+            </div>
+            <div class="spec-sheet__row">
+              <span class="spec-sheet__row-label">Interior</span>
+              <span class="spec-sheet__row-value">Bespoke Red/Black Leather &amp; Pepita</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer" id="footer">
+      <div>
+        <div class="footer__top">
+          <div class="footer__top-left">
+            <div class="footer__logo-large">
+              <img src="assets/SMG-Logo.png" alt="SMG Werks">
+            </div>
+            <p class="footer__tagline">Excellence since 1956</p>
+            <h2 class="footer__headline">Schedule a<br>Consultation.</h2>
+            <p class="footer__desc">Feel free to reach out to secure a build slot at SMG Werks. Tell us about your car and we'll get back to you.</p>
+          </div>
+          <div class="footer__top-right">
+            <form class="footer__form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+              <div class="footer__form-group">
+                <label class="footer__form-label" for="email">Email</label>
+                <input class="footer__form-input" type="email" id="email" name="email" placeholder="your@email.com" required>
+              </div>
+              <div class="footer__form-row">
+                <div class="footer__form-group">
+                  <label class="footer__form-label" for="year">Year</label>
+                  <input class="footer__form-input" type="text" id="year" name="year" placeholder="1993">
+                </div>
+                <div class="footer__form-group">
+                  <label class="footer__form-label" for="model">Model</label>
+                  <input class="footer__form-input" type="text" id="model" name="model" placeholder="993 Carrera">
+                </div>
+              </div>
+              <div class="footer__form-group">
+                <label class="footer__form-label" for="message">Message</label>
+                <textarea class="footer__form-textarea" id="message" name="message" placeholder="Tell us about your project..."></textarea>
+              </div>
+              <button type="submit" class="footer__form-submit">Send Inquiry</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="footer__nav">
+          <div class="footer__nav-col footer__nav-col--meta">
+            <span>SMG Werks</span>
+            <span>All rights reserved &copy; 2026</span>
+          </div>
+          <div class="footer__nav-col footer__nav-col--meta">
+            <span>1070 E Walnut St.</span>
+            <span>Pasadena, CA 91106</span>
+          </div>
+          <div class="footer__nav-col">
+            <p class="footer__nav-title">Navigate</p>
+            <a href="index.html">Home</a>
+            <a href="index.html#builds">Builds</a>
+            <a href="store.html">Store</a>
+            <a href="#">Contact Us</a>
+          </div>
+          <div class="footer__nav-col">
+            <p class="footer__nav-title">Social</p>
+            <a href="https://www.facebook.com/smgwerks/" target="_blank" rel="noopener noreferrer">Facebook</a>
+            <a href="https://www.instagram.com/smgwerks/" target="_blank" rel="noopener noreferrer">Instagram</a>
+          </div>
+          <div class="footer__nav-col">
+            <p class="footer__nav-title">Contact</p>
+            <a href="tel:+16267957018">+1 (626) 795-7018</a>
+            <a href="mailto:jack@smgwerks.com">jack@smgwerks.com</a>
+          </div>
+          <div class="footer__nav-col">
+            <p class="footer__nav-title">Hours</p>
+            <a href="#">Monday &ndash; Friday</a>
+            <a href="#">8am &ndash; 5pm</a>
+          </div>
+        </div>
+        <div class="footer__disclaimer-row">
+          <p class="footer__disclaimer">SMG Werks is not affiliated with, endorsed by, or sponsored by Dr. Ing. h.c. F. Porsche AG or any of its subsidiaries. Porsche is a registered trademark of Dr. Ing. h.c. F. Porsche AG.</p>
+          <p class="footer__credit">Designed by <a href="https://khoiqnguyen.com" target="_blank" rel="noopener noreferrer">Khoi Nguyen</a></p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ========== SCRIPTS ========== -->
+    <script>
+      const hamburger = document.getElementById("hamburger");
+      const menuOverlay = document.getElementById("menuOverlay");
+
+      const navbar = document.querySelector(".navbar");
+      hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        menuOverlay.classList.toggle("active");
+        navbar.classList.toggle("menu-open");
+        document.body.style.overflow = menuOverlay.classList.contains("active") ? "hidden" : "";
+      });
+
+      document.querySelectorAll(".menu-overlay__link").forEach(link => {
+        link.addEventListener("click", () => {
+          hamburger.classList.remove("active");
+          menuOverlay.classList.remove("active");
+          navbar.classList.remove("menu-open");
+          document.body.style.overflow = "";
+        });
+      });
+
+      const reveals = document.querySelectorAll(".reveal");
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add("visible");
+        });
+      }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+      reveals.forEach(el => revealObserver.observe(el));
+    </script>
+  </body>
+</html>

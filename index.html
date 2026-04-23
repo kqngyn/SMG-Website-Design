@@ -1,1 +1,1345 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SMG Werks — Revisioning Icons</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ========== CSS VARIABLES ========== */
+      :root {
+        --color-cotton: #f5f0eb;
+        --color-red: #e30613;
+        --color-maroon: #5c1a1b;
+        --color-black: #0a0a0a;
+        --color-white: #ffffff;
 
+        --font-heading: "Space Grotesk", sans-serif;
+        --font-body: "Inter", sans-serif;
+
+        --nav-height: 72px;
+        --border-radius: 12px;
+      }
+
+      /* ========== RESET & BASE ========== */
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--font-body);
+        background-color: var(--color-cotton);
+        color: var(--color-black);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      /* ========== TYPOGRAPHY ========== */
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: var(--font-heading);
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        line-height: 1.1;
+      }
+
+      /* ========== NAVBAR ========== */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: var(--nav-height);
+        z-index: 1100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 40px;
+        background: var(--color-white);
+        border-bottom: 1px solid rgba(10, 10, 10, 0.08);
+      }
+
+      .navbar__logo img {
+        height: 28px;
+        width: auto;
+      }
+
+      .navbar__links {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+        list-style: none;
+        margin-left: auto;
+        margin-right: 24px;
+      }
+
+      .navbar__link {
+        font-family: var(--font-heading);
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-black);
+        transition: color 0.3s ease;
+        padding: 8px 0;
+      }
+
+      .navbar__link:hover {
+        color: var(--color-red);
+      }
+
+      /* Dropdown */
+      .navbar__dropdown {
+        position: relative;
+      }
+
+      .navbar__dropdown-trigger {
+        font-family: var(--font-heading);
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-black);
+        transition: color 0.3s ease;
+        padding: 8px 0;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        background: none;
+        border: none;
+      }
+
+      .navbar__dropdown-trigger:hover {
+        color: var(--color-red);
+      }
+
+      .navbar__dropdown-trigger svg {
+        width: 12px;
+        height: 12px;
+        transition: transform 0.3s ease;
+      }
+
+      .navbar__dropdown:hover .navbar__dropdown-trigger svg {
+        transform: rotate(180deg);
+      }
+
+      .navbar__dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: -12px;
+        background: var(--color-white);
+        border: 1px solid rgba(10, 10, 10, 0.08);
+        border-radius: 8px;
+        padding: 8px 0;
+        min-width: 160px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(8px);
+        transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+        box-shadow: 0 8px 24px rgba(10, 10, 10, 0.08);
+      }
+
+      .navbar__dropdown:hover .navbar__dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .navbar__dropdown-item {
+        display: block;
+        font-family: var(--font-heading);
+        font-size: 0.7rem;
+        font-weight: 400;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(10, 10, 10, 0.5);
+        padding: 8px 20px;
+        transition: color 0.2s ease, background 0.2s ease;
+      }
+
+      .navbar__dropdown-item:hover {
+        color: var(--color-red);
+        background: rgba(10, 10, 10, 0.03);
+      }
+
+      /* Right side icons */
+      .navbar__actions {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .navbar__icon {
+        color: var(--color-black);
+        transition: color 0.3s ease;
+        display: flex;
+        align-items: center;
+      }
+
+      .navbar__icon:hover {
+        color: var(--color-red);
+      }
+
+      .navbar__icon svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      /* Mobile hamburger — hidden on desktop */
+      .navbar__hamburger {
+        display: none;
+        width: 28px;
+        height: 18px;
+        cursor: pointer;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .navbar__hamburger span {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background: var(--color-black);
+        transition: transform 0.4s ease, opacity 0.3s ease;
+      }
+
+      .navbar__hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+      .navbar__hamburger.active span:nth-child(2) { opacity: 0; }
+      .navbar__hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+      /* Mobile menu */
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        top: var(--nav-height);
+        left: 0;
+        width: 100%;
+        height: calc(100vh - var(--nav-height));
+        background: var(--color-white);
+        z-index: 1050;
+        padding: 40px 24px;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .mobile-menu.active {
+        display: flex;
+      }
+
+      .mobile-menu__link {
+        font-family: var(--font-heading);
+        font-size: 1.5rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--color-black);
+        padding: 12px 0;
+        transition: color 0.3s ease;
+      }
+
+      .mobile-menu__link:hover {
+        color: var(--color-red);
+      }
+
+      .mobile-menu__sub {
+        padding-left: 16px;
+      }
+
+      .mobile-menu__sub a {
+        font-family: var(--font-heading);
+        font-size: 1rem;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: rgba(10, 10, 10, 0.4);
+        display: block;
+        padding: 8px 0;
+        transition: color 0.3s ease;
+      }
+
+      .mobile-menu__sub a:hover {
+        color: var(--color-red);
+      }
+
+      /* ========== HERO SECTION ========== */
+      .hero {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-start;
+        overflow: hidden;
+      }
+
+      .hero__video-placeholder {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--color-black);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 0;
+      }
+
+      .hero__video-placeholder span {
+        font-family: var(--font-heading);
+        font-size: 1rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.25);
+      }
+
+      .hero__overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to top,
+          rgba(10, 10, 10, 0.7) 0%,
+          transparent 50%
+        );
+        z-index: 1;
+      }
+
+      .hero__content {
+        position: relative;
+        z-index: 2;
+        padding: 60px 40px;
+        max-width: 700px;
+      }
+
+      .hero__subtitle {
+        font-family: var(--font-body);
+        font-size: 0.85rem;
+        font-weight: 400;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.6);
+        margin-bottom: 16px;
+      }
+
+      .hero__title {
+        font-size: clamp(3rem, 7vw, 5.5rem);
+        color: var(--color-white);
+        margin-bottom: 24px;
+        letter-spacing: 0.04em;
+      }
+
+      .hero__cta {
+        display: inline-block;
+        font-family: var(--font-heading);
+        font-size: 0.85rem;
+        font-weight: 500;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--color-white);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        padding: 16px 40px;
+        border-radius: var(--border-radius);
+        transition:
+          background 0.3s ease,
+          border-color 0.3s ease;
+        cursor: pointer;
+      }
+
+      .hero__cta:hover {
+        background: var(--color-red);
+        border-color: var(--color-red);
+      }
+
+      /* ========== ABOUT SECTION ========== */
+      .about {
+        position: relative;
+        background: var(--color-white);
+      }
+
+      .about__inner {
+        display: flex;
+        min-height: 200vh;
+        position: relative;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 40px;
+      }
+
+      /* Sticky text column */
+      .about__text-col {
+        flex: 0 0 45%;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        align-self: flex-start;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 60px 60px 60px 0;
+        z-index: 2;
+      }
+
+      .about__label {
+        font-family: var(--font-heading);
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--color-red);
+        margin-bottom: 24px;
+      }
+
+      .about__title {
+        font-size: clamp(2rem, 4vw, 3.5rem);
+        color: var(--color-black);
+        margin-bottom: 32px;
+      }
+
+      .about__text {
+        font-size: 1.05rem;
+        line-height: 1.8;
+        color: rgba(10, 10, 10, 0.6);
+        margin-bottom: 24px;
+        max-width: 480px;
+      }
+
+      .about__divider {
+        width: 60px;
+        height: 2px;
+        background: var(--color-red);
+        margin: 32px 0;
+      }
+
+      /* Parallax images column */
+      .about__images-col {
+        flex: 0 0 55%;
+        position: relative;
+        padding: 120px 0;
+      }
+
+      .about__parallax-img {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        background: #1a1a1a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        will-change: transform;
+      }
+
+      .about__parallax-img span {
+        font-family: var(--font-heading);
+        font-size: 0.75rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.2);
+      }
+
+      .about__parallax-img--1 {
+        width: 55%;
+        aspect-ratio: 3 / 4;
+        margin-left: 10%;
+      }
+
+      .about__parallax-img--2 {
+        width: 45%;
+        aspect-ratio: 4 / 3;
+        margin-left: auto;
+        margin-top: -80px;
+        margin-right: 5%;
+      }
+
+      .about__parallax-img--3 {
+        width: 65%;
+        aspect-ratio: 16 / 10;
+        margin-left: 20%;
+        margin-top: 60px;
+      }
+
+      .about__parallax-img--4 {
+        width: 40%;
+        aspect-ratio: 3 / 4;
+        margin-top: -40px;
+        margin-left: 5%;
+      }
+
+      /* ========== FEATURED BUILDS ========== */
+      .builds {
+        display: flex;
+        min-height: 100vh;
+        background: var(--color-white);
+      }
+
+      .builds__left {
+        flex: 0 0 35%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 80px 48px;
+      }
+
+      .builds__label {
+        font-family: var(--font-heading);
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--color-red);
+        margin-bottom: 16px;
+      }
+
+      .builds__title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        color: var(--color-black);
+        margin-bottom: 32px;
+      }
+
+      /* Toggle buttons */
+      .builds__toggle {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        border: 1px solid rgba(10, 10, 10, 0.15);
+        max-width: 240px;
+      }
+
+      .builds__toggle-btn {
+        font-family: var(--font-heading);
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 14px 28px;
+        border: none;
+        cursor: pointer;
+        transition: background 0.3s ease, color 0.3s ease;
+        background: transparent;
+        color: rgba(10, 10, 10, 0.4);
+        text-align: left;
+      }
+
+      .builds__toggle-btn.active {
+        background: var(--color-black);
+        color: var(--color-white);
+      }
+
+      .builds__toggle-btn:not(.active):hover {
+        color: var(--color-black);
+      }
+
+      /* Right side - car showcase */
+      .builds__right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 80px 48px;
+      }
+
+      .builds__car {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 700px;
+      }
+
+      .builds__car.active {
+        display: flex;
+      }
+
+      .builds__car-image {
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+        object-fit: contain;
+        margin-bottom: 32px;
+      }
+
+      .builds__info {
+        display: flex;
+        align-items: flex-start;
+        gap: 40px;
+        width: 100%;
+        text-align: left;
+        padding-top: 24px;
+        border-top: 1px solid rgba(10, 10, 10, 0.1);
+      }
+
+      .builds__info-meta {
+        flex: 0 0 auto;
+      }
+
+      .builds__info-name {
+        font-family: var(--font-heading);
+        font-size: 0.7rem;
+        font-weight: 500;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--color-red);
+        margin-bottom: 8px;
+      }
+
+      .builds__info-title {
+        font-family: var(--font-heading);
+        font-size: clamp(1.2rem, 2vw, 1.6rem);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--color-black);
+        line-height: 1.2;
+      }
+
+      .builds__info-body {
+        flex: 1;
+      }
+
+      .builds__info-desc {
+        font-size: 0.9rem;
+        line-height: 1.7;
+        color: rgba(10, 10, 10, 0.6);
+        margin-bottom: 16px;
+      }
+
+      .builds__info-link {
+        font-family: var(--font-heading);
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--color-black);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: color 0.3s ease, gap 0.3s ease;
+      }
+
+      .builds__info-link:hover {
+        color: var(--color-red);
+        gap: 14px;
+      }
+
+      .builds__info-link svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      /* ========== FOOTER ========== */
+      .footer {
+        min-height: 100vh;
+        background: var(--color-cotton);
+        color: var(--color-black);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 60px 60px 40px;
+      }
+
+      /* Top area: headline + form */
+      .footer__top {
+        display: flex;
+        gap: 60px;
+        padding-bottom: 60px;
+      }
+
+      .footer__top-left {
+        flex: 1;
+      }
+
+      .footer__logo-large {
+        margin-bottom: 32px;
+      }
+
+      .footer__logo-large img {
+        height: clamp(40px, 6vw, 60px);
+        width: auto;
+      }
+
+      .footer__headline {
+        font-family: var(--font-heading);
+        font-size: clamp(2.2rem, 4.5vw, 4rem);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        line-height: 1.05;
+        color: var(--color-black);
+        margin-bottom: 24px;
+      }
+
+      .footer__tagline {
+        font-family: var(--font-body);
+        font-size: 0.8rem;
+        font-style: italic;
+        color: rgba(10, 10, 10, 0.35);
+        margin-bottom: 16px;
+      }
+
+      .footer__desc {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        color: rgba(10, 10, 10, 0.45);
+        max-width: 420px;
+      }
+
+      /* Form in footer */
+      .footer__top-right {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        max-width: 480px;
+      }
+
+      .footer__form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .footer__form-row {
+        display: flex;
+        gap: 12px;
+      }
+
+      .footer__form-row > * {
+        flex: 1;
+      }
+
+      .footer__form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .footer__form-label {
+        font-family: var(--font-heading);
+        font-size: 0.6rem;
+        font-weight: 500;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(10, 10, 10, 0.35);
+      }
+
+      .footer__form-input,
+      .footer__form-textarea {
+        font-family: var(--font-body);
+        font-size: 0.9rem;
+        color: var(--color-black);
+        background: transparent;
+        border: 1px solid rgba(10, 10, 10, 0.15);
+        border-radius: 8px;
+        padding: 12px 14px;
+        outline: none;
+        transition: border-color 0.3s ease, background 0.3s ease;
+      }
+
+      .footer__form-input::placeholder,
+      .footer__form-textarea::placeholder {
+        color: rgba(10, 10, 10, 0.25);
+      }
+
+      .footer__form-input:focus,
+      .footer__form-textarea:focus {
+        border-color: var(--color-red);
+        background: rgba(255, 255, 255, 0.5);
+      }
+
+      .footer__form-textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      .footer__form-submit {
+        font-family: var(--font-heading);
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--color-white);
+        background: var(--color-black);
+        border: none;
+        border-radius: 8px;
+        padding: 14px 32px;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.3s ease;
+        align-self: flex-start;
+        margin-top: 4px;
+      }
+
+      .footer__form-submit:hover {
+        background: var(--color-red);
+        transform: translateY(-2px);
+      }
+
+      /* Bottom nav row */
+      .footer__nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding-top: 24px;
+        border-top: 1px solid rgba(10, 10, 10, 0.12);
+        flex-wrap: wrap;
+        gap: 32px;
+      }
+
+      .footer__nav-col {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .footer__nav-col--meta {
+        font-family: var(--font-body);
+        font-size: 0.8rem;
+        color: rgba(10, 10, 10, 0.35);
+        line-height: 1.6;
+      }
+
+      .footer__nav-title {
+        font-family: var(--font-heading);
+        font-size: 0.65rem;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(10, 10, 10, 0.35);
+        margin-bottom: 4px;
+      }
+
+      .footer__nav-col a {
+        font-size: 0.85rem;
+        color: rgba(10, 10, 10, 0.6);
+        transition: color 0.3s ease;
+        line-height: 1.8;
+      }
+
+      .footer__nav-col a:hover {
+        color: var(--color-red);
+      }
+
+      .footer__disclaimer-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding-top: 32px;
+        gap: 24px;
+      }
+
+      .footer__disclaimer {
+        font-size: 0.7rem;
+        color: rgba(10, 10, 10, 0.2);
+        max-width: 600px;
+        line-height: 1.6;
+      }
+
+      .footer__credit {
+        font-size: 0.7rem;
+        color: rgba(10, 10, 10, 0.3);
+        white-space: nowrap;
+      }
+
+      .footer__credit a {
+        color: rgba(10, 10, 10, 0.45);
+        transition: color 0.3s ease;
+      }
+
+      .footer__credit a:hover {
+        color: var(--color-red);
+      }
+
+      /* ========== SCROLL ANIMATIONS ========== */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition:
+          opacity 0.8s ease,
+          transform 0.8s ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .reveal-delay-1 {
+        transition-delay: 0.1s;
+      }
+      .reveal-delay-2 {
+        transition-delay: 0.2s;
+      }
+      .reveal-delay-3 {
+        transition-delay: 0.3s;
+      }
+
+      /* ========== RESPONSIVE ========== */
+      @media (max-width: 1024px) {
+        .about__inner {
+          flex-direction: column;
+          min-height: auto;
+        }
+
+        .about__text-col {
+          position: relative;
+          height: auto;
+          flex: none;
+          padding: 100px 0 60px;
+        }
+
+        .about__images-col {
+          flex: none;
+          padding: 0 0 80px;
+        }
+
+        .about__parallax-img--1,
+        .about__parallax-img--2,
+        .about__parallax-img--3,
+        .about__parallax-img--4 {
+          width: 80%;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 24px;
+        }
+
+        .builds {
+          flex-direction: column;
+          min-height: auto;
+        }
+
+        .builds__left {
+          flex: none;
+          border-right: none;
+          border-bottom: 1px solid rgba(10, 10, 10, 0.08);
+          padding: 80px 40px 48px;
+        }
+
+        .builds__toggle {
+          flex-direction: row;
+          max-width: none;
+          display: inline-flex;
+        }
+
+        .builds__right {
+          padding: 48px 40px 80px;
+        }
+
+        .builds__info {
+          flex-direction: column;
+          gap: 24px;
+        }
+
+        .footer__top {
+          flex-direction: column;
+        }
+
+        .footer__top-right {
+          max-width: 100%;
+        }
+
+        .footer__nav {
+          gap: 28px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .navbar {
+          padding: 0 24px;
+        }
+
+        .navbar__links,
+        .navbar__actions {
+          display: none;
+        }
+
+        .navbar__hamburger {
+          display: flex;
+        }
+
+        .hero__content {
+          padding: 40px 24px;
+        }
+
+        .about__inner {
+          padding: 0 24px;
+        }
+
+        .builds__left {
+          padding: 60px 24px 40px;
+        }
+
+        .builds__right {
+          padding: 40px 24px 60px;
+        }
+
+        .footer {
+          padding: 40px 24px 24px;
+          min-height: auto;
+        }
+
+        .footer__headline {
+          font-size: clamp(2rem, 8vw, 3rem);
+        }
+
+        .footer__form-row {
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        .footer__nav {
+          flex-direction: column;
+          gap: 24px;
+        }
+
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ========== NAVBAR ========== -->
+    <nav class="navbar" id="navbar">
+      <a href="#" class="navbar__logo">
+        <img src="assets/SMG-Logo.png" alt="SMG Werks" />
+      </a>
+      <ul class="navbar__links">
+        <li class="navbar__dropdown">
+          <button class="navbar__dropdown-trigger">
+            Builds
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="navbar__dropdown-menu">
+            <a href="p001.html" class="navbar__dropdown-item">P001 — 993 RS</a>
+            <a href="p002.html" class="navbar__dropdown-item">P002 — 901 R</a>
+          </div>
+        </li>
+        <li><a href="store.html" class="navbar__link">Store</a></li>
+        <li><a href="#footer" class="navbar__link">Contact</a></li>
+      </ul>
+      <div class="navbar__actions">
+        <a href="#" class="navbar__icon" aria-label="Cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </a>
+      </div>
+      <div class="navbar__hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </nav>
+
+    <!-- ========== MOBILE MENU ========== -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#" class="mobile-menu__link">Home</a>
+      <a href="#builds" class="mobile-menu__link">Builds</a>
+      <div class="mobile-menu__sub">
+        <a href="p001.html">P001 — 993 RS</a>
+        <a href="p002.html">P002 — 901 R</a>
+      </div>
+      <a href="store.html" class="mobile-menu__link">Store</a>
+      <a href="#footer" class="mobile-menu__link">Contact</a>
+      <a href="#" class="mobile-menu__link">Cart</a>
+    </div>
+
+    <!-- ========== HERO ========== -->
+    <section class="hero" id="hero">
+      <div class="hero__video-placeholder">
+        <span>Video Placeholder</span>
+      </div>
+      <div class="hero__overlay"></div>
+      <div class="hero__content">
+        <p class="hero__subtitle">911 &bull; 964 &bull; 993</p>
+        <h1 class="hero__title">Revisioning<br />Icons</h1>
+
+      </div>
+    </section>
+
+    <!-- ========== ABOUT ========== -->
+    <section class="about" id="about">
+      <div class="about__inner">
+        <div class="about__text-col">
+          <div class="reveal">
+            <p class="about__label">Our Ethos</p>
+            <h2 class="about__title">Crafted Through<br />Our Perspective</h2>
+          </div>
+          <div class="reveal reveal-delay-1">
+            <p class="about__text">
+              The SMG Werks 911s are revisioned through our perspective,
+              integrating today's advanced engineering while maintaining the
+              timeless allure of their classic design.
+            </p>
+          </div>
+          <div class="about__divider reveal reveal-delay-2"></div>
+          <div class="reveal reveal-delay-3">
+            <p class="about__text">
+              At SMG Werks, we preserve the authenticity of each vehicle by
+              maintaining its original design and structure rather than
+              performing backdating/forward-dating modifications. Our approach
+              focuses on enhancing the car with modern engineering and
+              technology, ensuring improved performance and functionality.
+            </p>
+          </div>
+        </div>
+        <div class="about__images-col">
+          <div
+            class="about__parallax-img about__parallax-img--1"
+            data-speed="0.15"
+          >
+            <span>Interior Detail</span>
+          </div>
+          <div
+            class="about__parallax-img about__parallax-img--2"
+            data-speed="-0.1"
+          >
+            <span>Engine Bay</span>
+          </div>
+          <div
+            class="about__parallax-img about__parallax-img--3"
+            data-speed="0.2"
+          >
+            <span>Side Profile</span>
+          </div>
+          <div
+            class="about__parallax-img about__parallax-img--4"
+            data-speed="-0.15"
+          >
+            <span>Wheel Detail</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FEATURED BUILDS ========== -->
+    <section class="builds" id="builds">
+      <div class="builds__left reveal">
+        <p class="builds__label">Featured Builds</p>
+        <h2 class="builds__title">Our<br>Projects</h2>
+        <div class="builds__toggle">
+          <button class="builds__toggle-btn active" data-car="p001">993 RS</button>
+          <button class="builds__toggle-btn" data-car="p002">901 R</button>
+        </div>
+      </div>
+
+      <div class="builds__right">
+        <!-- P001 -->
+        <div class="builds__car active" id="car-p001">
+          <img src="assets/993RS.png" alt="993 RS - Black Widow" class="builds__car-image">
+          <div class="builds__info">
+            <div class="builds__info-meta">
+              <p class="builds__info-name">P001</p>
+              <h3 class="builds__info-title">993 RS<br>Black Widow</h3>
+            </div>
+            <div class="builds__info-body">
+              <p class="builds__info-desc">1997 Porsche 911 (993) &bull; 3.6L H6. Revisioned through our perspective, integrating today's advanced engineering while maintaining the timeless allure of its classic design.</p>
+              <a href="p001.html" class="builds__info-link">
+                Learn More
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- P002 -->
+        <div class="builds__car" id="car-p002">
+          <img src="assets/901Wasabi.png" alt="901 R" class="builds__car-image">
+          <div class="builds__info">
+            <div class="builds__info-meta">
+              <p class="builds__info-name">P002</p>
+              <h3 class="builds__info-title">901 R</h3>
+            </div>
+            <div class="builds__info-body">
+              <p class="builds__info-desc">1970 Porsche 911 (F-Body) &bull; 2.2L H6. A bold reinterpretation that pushes the boundaries of classic 911 restoration with modern performance and unmistakable presence.</p>
+              <a href="p002.html" class="builds__info-link">
+                Learn More
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer" id="footer">
+      <div>
+        <div class="footer__top">
+          <div class="footer__top-left">
+            <div class="footer__logo-large">
+              <img src="assets/SMG-Logo.png" alt="SMG Werks">
+            </div>
+            <p class="footer__tagline">Excellence since 1956</p>
+            <h2 class="footer__headline">Schedule a<br>Consultation.</h2>
+            <p class="footer__desc">Feel free to reach out to secure a build slot at SMG Werks. Tell us about your car and we'll get back to you.</p>
+          </div>
+          <div class="footer__top-right">
+            <form class="footer__form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+              <div class="footer__form-group">
+                <label class="footer__form-label" for="email">Email</label>
+                <input class="footer__form-input" type="email" id="email" name="email" placeholder="your@email.com" required>
+              </div>
+              <div class="footer__form-row">
+                <div class="footer__form-group">
+                  <label class="footer__form-label" for="year">Year</label>
+                  <input class="footer__form-input" type="text" id="year" name="year" placeholder="1993">
+                </div>
+                <div class="footer__form-group">
+                  <label class="footer__form-label" for="model">Model</label>
+                  <input class="footer__form-input" type="text" id="model" name="model" placeholder="993 Carrera">
+                </div>
+              </div>
+              <div class="footer__form-group">
+                <label class="footer__form-label" for="message">Message</label>
+                <textarea class="footer__form-textarea" id="message" name="message" placeholder="Tell us about your project..."></textarea>
+              </div>
+              <button type="submit" class="footer__form-submit">Send Inquiry</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer__nav">
+          <div class="footer__nav-col footer__nav-col--meta">
+            <span>SMG Werks</span>
+            <span>All rights reserved &copy; 2026</span>
+          </div>
+          <div class="footer__nav-col footer__nav-col--meta">
+            <span>1070 E Walnut St.</span>
+            <span>Pasadena, CA 91106</span>
+          </div>
+          <div class="footer__nav-col">
+            <p class="footer__nav-title">Navigate</p>
+            <a href="#">Home</a>
+            <a href="#builds">Builds</a>
+            <a href="store.html">Store</a>
+            <a href="#">Contact Us</a>
+          </div>
+          <div class="footer__nav-col">
+            <p class="footer__nav-title">Social</p>
+            <a href="https://www.facebook.com/smgwerks/" target="_blank" rel="noopener noreferrer">Facebook</a>
+            <a href="https://www.instagram.com/smgwerks/" target="_blank" rel="noopener noreferrer">Instagram</a>
+          </div>
+          <div class="footer__nav-col">
+            <p class="footer__nav-title">Contact</p>
+            <a href="tel:+16267957018">+1 (626) 795-7018</a>
+            <a href="mailto:jack@smgwerks.com">jack@smgwerks.com</a>
+          </div>
+          <div class="footer__nav-col">
+            <p class="footer__nav-title">Hours</p>
+            <a href="#">Monday &ndash; Friday</a>
+            <a href="#">8am &ndash; 5pm</a>
+          </div>
+        </div>
+        <div class="footer__disclaimer-row">
+          <p class="footer__disclaimer">SMG Werks is not affiliated with, endorsed by, or sponsored by Dr. Ing. h.c. F. Porsche AG or any of its subsidiaries. Porsche is a registered trademark of Dr. Ing. h.c. F. Porsche AG.</p>
+          <p class="footer__credit">Designed by <a href="https://khoiqnguyen.com" target="_blank" rel="noopener noreferrer">Khoi Nguyen</a></p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ========== SCRIPTS ========== -->
+    <script>
+      // --- Mobile hamburger toggle ---
+      const hamburger = document.getElementById("hamburger");
+      const mobileMenu = document.getElementById("mobileMenu");
+
+      hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        mobileMenu.classList.toggle("active");
+        document.body.style.overflow = mobileMenu.classList.contains("active") ? "hidden" : "";
+      });
+
+      document.querySelectorAll(".mobile-menu__link").forEach(link => {
+        link.addEventListener("click", () => {
+          hamburger.classList.remove("active");
+          mobileMenu.classList.remove("active");
+          document.body.style.overflow = "";
+        });
+      });
+
+      // --- Parallax images in about section ---
+      const parallaxImages = document.querySelectorAll(".about__parallax-img");
+
+      function updateParallax() {
+        const aboutSection = document.querySelector(".about");
+        const rect = aboutSection.getBoundingClientRect();
+        const scrollProgress = -rect.top;
+
+        parallaxImages.forEach((img) => {
+          const speed = parseFloat(img.dataset.speed) || 0;
+          const yOffset = scrollProgress * speed;
+          img.style.transform = `translateY(${yOffset}px)`;
+        });
+
+        requestAnimationFrame(updateParallax);
+      }
+
+      requestAnimationFrame(updateParallax);
+
+      // --- Scroll reveal ---
+      const reveals = document.querySelectorAll(".reveal");
+
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        {
+          threshold: 0.15,
+          rootMargin: "0px 0px -50px 0px",
+        },
+      );
+
+      reveals.forEach((el) => revealObserver.observe(el));
+
+      // --- Builds toggle ---
+      const toggleBtns = document.querySelectorAll(".builds__toggle-btn");
+      const cars = document.querySelectorAll(".builds__car");
+
+      toggleBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const target = btn.dataset.car;
+
+          toggleBtns.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+
+          cars.forEach((car) => {
+            car.classList.remove("active");
+            if (car.id === `car-${target}`) {
+              car.classList.add("active");
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
