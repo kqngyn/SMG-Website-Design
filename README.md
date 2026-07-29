@@ -1,7 +1,7 @@
 # SMG Werks — Website
 
 A modern, high-performance website built for SMG Werks — a brand dedicated to preserving the authenticity of classic vehicles while enhancing them with contemporary engineering and technology.
-
+ 
 ---
 
 ## Overview
